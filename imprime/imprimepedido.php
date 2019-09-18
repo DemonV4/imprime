@@ -47,6 +47,7 @@
                         <label>L&L MOVEIS E COLCHOES LTDA.</label>
                         <label>TELEFONE</label>
                         <label>RUA</label>
+                        <label>CIDADE - ESTADO</label>
                     </th>
                 </tr>
                 <tbody>
