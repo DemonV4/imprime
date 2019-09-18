@@ -102,7 +102,7 @@ create table Pedidos -- TABELA DE PEDIDOS
     formadepagamento int, -- FORMA DO PAGAMENTO
     parcelas int, -- SE O CLIENTE FAZER PARCELAS E QUANTAS PARCELAS ELE DESEJOU
     dtvenda date, -- DATA DA VENDA DO PRODUTO
-    constraint foreign key(idvendedor) references Funcionario(id),
+    constraint foreign key(idvendedor) references Funcionarios(id),
     constraint foreign key(idcliente) references Clientes(id),
     constraint foreign key(idproduto) references Produtos(id),
 	constraint foreign key(formadepagamento) references FormPagamento(id)
@@ -110,7 +110,7 @@ create table Pedidos -- TABELA DE PEDIDOS
 
 create table Funcionarios -- TABELA DE FUNCIONARIOS
 (
-	idfuncionario int primary key auto_increment, -- CODIGO DO FUNCIONARIO
+	id int primary key auto_increment, -- CODIGO DO FUNCIONARIO
     nome varchar(150) not null, -- NOME DO FUNCIONARIO
     cargo bit
 )default charset utf8;
@@ -147,6 +147,7 @@ INSERT INTO Produtos(nome,grupo,fornecedor,qtde_estoque,volumes,custo,valor) -- 
 VALUES
 ('Cama',1,1,15,4,500.00,1000.00);
 
+select * from pedidos;
 SELECT idcliente, id,formadepagamento, parcelas from Pedidos ;
 
 SELECT 
@@ -179,7 +180,7 @@ SELECT
     on idvendedor.Pedidos = id.Funcionarios
     inner join Clientes
     on idcliente.Pedidos = id.Clientes
-    inner join Produto
+    inner join Produtos
     on idproduto.Pedidos = id.Produtos;
     
     
@@ -208,15 +209,15 @@ SELECT
     Pedidos.total,
     Pedidos.formadepagamento,
     Pedidos.parcelas,
-    Pedido.dtvenda
+    Pedidos.dtvenda
     from Pedidos
     inner join Funcionarios
     on Pedidos.idvendedor = Funcionarios.id
     inner join Clientes
     on Pedidos.idcliente = Clientes.id
-    inner join Produto
+    inner join Produtos
     on Pedidos.idproduto = Produtos.id
-    order by Pedidos;
+    order by Pedidos.id;
     
     
     
