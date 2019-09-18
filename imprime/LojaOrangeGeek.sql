@@ -128,6 +128,9 @@ INSERT INTO Grupos(nome) --  INSERT DA TABELA GRUPOS DE PRODUTOS
 values
 ('Cama');
 
+INSERT INTO Representantes(nome,cpf,rg,celular,telefone,email)
+values
+('Representante','45246518206','466787547','939468575','(11)38106585','teste@email.com');
 INSERT INTO Pedidos(idvendedor,idcliente,idproduto,qtde,valor,desconto,total,formadepagamento,parcelas,dtvenda) -- INSERT DE TESTE PARA A TABELA FUNCIONARIO
 values
 (1,1,1,1,2500.00,200.00,2300.00,1,2,'2019-09-09');
@@ -148,16 +151,75 @@ SELECT idcliente, id,formadepagamento, parcelas from Pedidos ;
 
 SELECT 
 	id.Pedidos,
-    idvendedor,
-    idcliente,
-    idproduto,
-    qtde,
-    valor,
-    desconto,
-    total,
-    formadepagamento,
-    parcelas,
-    dtvenda from Pedidos inner join Clientes order by id;
+    idvendedor.Pedidos,
+    nome.Funcionarios,
+    idcliente.Pedidos,
+    nome.Clientes,
+    cpf.Clientes,
+    cep.Clientes,
+    endereco.Clientes,
+    numero.Clientes,
+    complemento.Clientes,
+    bairro.Clientes,
+    cidade.Clientes,
+    uf.Clientes,
+    celular.Clientes,
+    operadora.Clientes,
+    idproduto.Pedidos,
+    nome.Produtos,
+    qtde.Pedidos,
+    valor.Pedidos,
+    desconto.Pedidos,
+    total.Pedidos,
+    formadepagamento.Pedidos,
+    parcelas.Pedidos,
+    dtvenda.Pedido
+    from Pedidos
+    inner join Funcionarios
+    on idvendedor.Pedidos = id.Funcionarios
+    inner join Clientes
+    on idcliente.Pedidos = id.Clientes
+    inner join Produto
+    on idproduto.Pedidos = id.Produtos;
+    
+    
+    
+SELECT 
+	Pedidos.id,
+    Pedidos.idvendedor,
+    Funcionarios.nome,
+    Pedidos.idcliente,
+    Clientes.nome,
+    Clientes.cpf,
+    Clientes.cep,
+    Clientes.endereco,
+    Clientes.numero,
+    Clientes.complemento,
+    Clientes.bairro,
+    Clientes.cidade,
+    Clientes.uf,
+    Clientes.celular,
+    Clientes.operadora,
+    Pedidos.idproduto,
+    Produtos.nome,
+    Pedidos.qtde,
+    Pedidos.valor,
+    Pedidos.desconto,
+    Pedidos.total,
+    Pedidos.formadepagamento,
+    Pedidos.parcelas,
+    Pedido.dtvenda
+    from Pedidos
+    inner join Funcionarios
+    on Pedidos.idvendedor = Funcionarios.id
+    inner join Clientes
+    on Pedidos.idcliente = Clientes.id
+    inner join Produto
+    on Pedidos.idproduto = Produtos.id
+    order by Pedidos;
+    
+    
+    
 SELECT
    autor.autor_nome,
    frase.frase_frases
