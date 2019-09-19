@@ -1,5 +1,6 @@
 <?php
     $oCon = mysqli_connect('localhost','root','','db_LojaOrangeGeek');
+    mysqli_set_charset($oCon, 'utf8');
     
     $cSql = "SELECT 
 	    pedid,
@@ -15,6 +16,7 @@
         clibairro,
         clicidade,
         cliuf,
+        clitelefone,
         clicelular,
         clioperadora,
         pedidproduto,
@@ -61,11 +63,15 @@
     .bordacortada > th, .bordacortada > td{
         border: 2px dotted black;
     }
+    .bordalateral > th:nth-child(1), .bordalateral > th:nth-child(2), .bordalateral > th:nth-child(3), .bordalateral > th:nth-child(4), .bordalateral > th:nth-child(4){
+        border-right: 2px dotted black;
+    }
 </style>
 <body>
     <section>
         <form>
             <table>
+            <thead>
                 <tr class="bordacortada">
                     <th colspan="1">
                         <label>L&L</label>
@@ -92,28 +98,29 @@
                         <label>CIDADE - ESTADO</label>
                     </th>
                 </tr>
+                </thead>
                 <tbody>
                     <tr class="bordacortada">
                         <td colspan="12">
                             <p class="meiolinha">13216546546</p>
-                            <?php echo'<p>CODIGO:  '.$vReg['pedid'].' - '.$vReg['clinome'].' CPF: '.$vReg['clicpf'].''?> NASC: < data de nascimento ></p>
-                            <p>ENDEREÇO: Uma Rua ai - Bairro</p>
-                            <p>SÃO PAULO - SP TELEFONE 40028922 Celular: 40028922</p>
-                            <p>CEP: 05181300</p>
+                            <?php echo'<p>CODIGO:  '.$vReg['pedid'].' - '.$vReg['clinome'].' CPF: '.$vReg['clicpf']?> NASC: < data de nascimento ></p>
+                            <?php echo'<p>ENDEREÇO: '.$vReg['cliendereco'].' - '.$vReg['clibairro']?></p>
+                            <?php echo'<p>'.$vReg['clicidade'].' - '.$vReg['cliuf'].' TELEFONE: '.$vReg['clitelefone'].' Celular: '.$vReg['clicelular']?></p>
+                            <?php echo'<p>CEP: '.$vReg['clicep']?></p>
                             <p>Ja . via - CONTABILIDADE</p>
                         </td>
                     </tr>
-                    <tr class="bordacortada">
+                    <tr colspan ="12"class="bordalateral">
                         <th colspan="1">ORIG</th>
-                        <th>COD</th>
+                        <th colspan="1">COD</th>
                         <th colspan="6">PRODUTO</th>
                         <th>QTDE</th>
                         <th>PREÇO</th>
                         <th>TOTAL</th>
                     </tr>
-                    <tr>
-                        <td>nome<td>
-                        <td>1<td>
+                    <tr colspan="12">
+                        <td>123</td>
+                        <td>1</td>
                         <td>Produto<td>
                         <td>10<td>
                         <td>15.00<td>

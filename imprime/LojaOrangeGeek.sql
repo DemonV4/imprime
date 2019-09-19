@@ -199,6 +199,7 @@ SELECT
     clibairro,
     clicidade,
     cliuf,
+    clitelefone,
     clicelular,
     clioperadora,
     pedidproduto,
