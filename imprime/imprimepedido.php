@@ -2,40 +2,40 @@
     $oCon = mysqli_connect('localhost','root','','db_LojaOrangeGeek');
     
     $cSql = "SELECT 
-        Pedidos.id,
-        Pedidos.idvendedor,
-        Funcionarios.nome,
-        Pedidos.idcliente,
-        Clientes.nome,
-        Clientes.cpf,
-        Clientes.cep,
-        Clientes.endereco,
-        Clientes.numero,
-        Clientes.complemento,
-        Clientes.bairro,
-        Clientes.cidade,
-        Clientes.uf,
-        Clientes.celular,
-        Clientes.operadora,
-        Pedidos.idproduto,
-        Produtos.nome,
-        Pedidos.qtde,
-        Pedidos.valor,
-        Pedidos.desconto,
-        Pedidos.total,
-        Pedidos.formadepagamento,
-        Pedidos.parcelas,
-        Pedidos.dtvenda
+	    pedid,
+        pedidvendedor,
+        fncnome,
+        pedidcliente,
+        clinome,
+        clicpf,
+        clicep,
+        cliendereco,
+        clinumero,
+        clicomplemento,
+        clibairro,
+        clicidade,
+        cliuf,
+        clicelular,
+        clioperadora,
+        pedidproduto,
+        prdnome,
+        pedqtde,
+        pedvalor,
+        peddesconto,
+        pedtotal,
+        pedformadepagamento,
+        pedparcelas,
+        peddtvenda
         from Pedidos
         inner join Funcionarios
-        on Pedidos.idvendedor = Funcionarios.id
+        on pedidvendedor = Fncid
         inner join Clientes
-        on Pedidos.idcliente = Clientes.id
+        on pedidcliente = cliid
         inner join Produtos
-        on Pedidos.idproduto = Produtos.id
-        order by Pedidos.id";
-        
-    $oDados = mysli_query($oCon,$cSql);
+        on pedidproduto = prdid
+        order by pedid";
+
+    $oDados = mysqli_query($oCon,$cSql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +74,10 @@
                     <th  colspan="2">
                         <label>Loja 1</label>
                         <label>VENDEDOR</label>
-                        <label>HUMANO</label>
+                        <?php
+                            $vReg = mysqli_fetch_array($oDados);
+                            echo'<label>'.$vReg['fncnome'].'</label>';
+                        ?>
                     </th>
                     <th  colspan="4">
                         <label>Pedido</label>
@@ -93,7 +96,7 @@
                     <tr class="bordacortada">
                         <td colspan="12">
                             <p class="meiolinha">13216546546</p>
-                            <p>CODIGO: 7007 - Nome da pessoa CPF: < numero do cpf > NASC: < data de nascimento ></p>
+                            <?php echo'<p>CODIGO:  '.$vReg['pedid'].' - '.$vReg['clinome'].' CPF: '.$vReg['clicpf'].''?> NASC: < data de nascimento ></p>
                             <p>ENDEREÇO: Uma Rua ai - Bairro</p>
                             <p>SÃO PAULO - SP TELEFONE 40028922 Celular: 40028922</p>
                             <p>CEP: 05181300</p>
