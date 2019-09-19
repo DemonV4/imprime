@@ -1,3 +1,42 @@
+<?php
+    $oCon = mysqli_connect('localhost','root','','db_LojaOrangeGeek');
+    
+    $cSql = "SELECT 
+        Pedidos.id,
+        Pedidos.idvendedor,
+        Funcionarios.nome,
+        Pedidos.idcliente,
+        Clientes.nome,
+        Clientes.cpf,
+        Clientes.cep,
+        Clientes.endereco,
+        Clientes.numero,
+        Clientes.complemento,
+        Clientes.bairro,
+        Clientes.cidade,
+        Clientes.uf,
+        Clientes.celular,
+        Clientes.operadora,
+        Pedidos.idproduto,
+        Produtos.nome,
+        Pedidos.qtde,
+        Pedidos.valor,
+        Pedidos.desconto,
+        Pedidos.total,
+        Pedidos.formadepagamento,
+        Pedidos.parcelas,
+        Pedidos.dtvenda
+        from Pedidos
+        inner join Funcionarios
+        on Pedidos.idvendedor = Funcionarios.id
+        inner join Clientes
+        on Pedidos.idcliente = Clientes.id
+        inner join Produtos
+        on Pedidos.idproduto = Produtos.id
+        order by Pedidos.id";
+        
+    $oDados = mysli_query($oCon,$cSql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
